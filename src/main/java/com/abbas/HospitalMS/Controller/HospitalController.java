@@ -32,7 +32,11 @@ public class HospitalController {
             System.out.println("11. Find Doctor by Specialization");
             System.out.println("12. Display All Doctors");
             System.out.println("13. Display All Patients");
-            System.out.println("14. Exit");
+            System.out.println("14. Assign Doctor to Patient");
+            System.out.println("15. Display Patients of a Doctor");
+            System.out.println("16. Exit");
+            
+            
 
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
@@ -245,8 +249,28 @@ public class HospitalController {
 
                 break;
 
-
             case 14:
+
+                System.out.print("Enter Patient ID: ");
+                int assignPatientId = sc.nextInt();
+
+                System.out.print("Enter Doctor ID: ");
+                int assignDoctorId = sc.nextInt();
+
+                service.assignDoctorToPatient(assignPatientId, assignDoctorId);
+
+                break;
+                
+            case 15:
+
+                System.out.print("Enter Doctor ID: ");
+                int displayDoctorId = sc.nextInt();
+
+                service.displayPatientsOfDoctor(displayDoctorId);
+
+                break;
+
+            case 16:
 
                 service.close();
 

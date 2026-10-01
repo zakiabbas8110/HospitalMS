@@ -243,6 +243,63 @@ public class HospitalService {
         }
     }
     
+    public void assignDoctorToPatient(int patientId, int doctorId) {
+
+        Patient patient = em.find(Patient.class, patientId);
+        Doctor doctor = em.find(Doctor.class, doctorId);
+
+        if (patient == null) {
+            System.out.println("Patient not found!");
+            return;
+        }
+
+        if (doctor == null) {
+            System.out.println("Doctor not found!");
+            return;
+        }
+
+        em.getTransaction().begin();
+
+        patient.setDoctor(doctor);
+
+        em.getTransaction().commit();
+
+        System.out.println("Doctor assigned to patient successfully!");
+    }
+    
+    public void displayPatientsOfDoctor(int doctorId) {
+
+        Doctor doctor = em.find(Doctor.class, doctorId);
+
+        if (doctor == null) {
+            System.out.println("Doctor not found!");
+            return;
+        }
+
+        System.out.println("Doctor ID: " + doctor.getDoctorId());
+        System.out.println("Doctor Name: " + doctor.getDoctorName());
+        System.out.println("Specialization: " + doctor.getSpecialization());
+
+        System.out.println("Patients:");
+
+        List<Patient> patients = doctor.getPatients();
+
+        if (patients == null || patients.isEmpty()) {
+            System.out.println("No patients assigned to this doctor!");
+        } else {
+
+            for (Patient p : patients) {
+
+                System.out.println("----------------------");
+                System.out.println("Patient ID: " + p.getPatientId());
+                System.out.println("Patient Name: " + p.getPatientName());
+                System.out.println("Age: " + p.getAge());
+                System.out.println("Gender: " + p.getGender());
+                System.out.println("Phone Number: " + p.getPhoneNumber());
+            }
+        }
+    }
+    
     
 
     // Close

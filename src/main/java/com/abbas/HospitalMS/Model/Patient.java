@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Patient {
@@ -16,6 +17,9 @@ public class Patient {
     private int age;
     private String gender;
     private String phoneNumber;
+
+    @ManyToOne
+    private Doctor doctor;
 
     public int getPatientId() {
         return patientId;
@@ -55,5 +59,13 @@ public class Patient {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 }

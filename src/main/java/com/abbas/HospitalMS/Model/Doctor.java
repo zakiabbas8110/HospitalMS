@@ -1,9 +1,12 @@
 package com.abbas.HospitalMS.Model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Doctor {
@@ -15,6 +18,9 @@ public class Doctor {
     private String doctorName;
     private String specialization;
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "doctor")
+    private List<Patient> patients;
 
     public int getDoctorId() {
         return doctorId;
@@ -46,5 +52,13 @@ public class Doctor {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public List<Patient> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(List<Patient> patients) {
+        this.patients = patients;
     }
 }
