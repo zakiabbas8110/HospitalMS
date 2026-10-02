@@ -135,7 +135,7 @@ public class HospitalService {
     }
 
     
-    public void findDoctorByName(String doctorName) {
+    public List<Doctor> findDoctorByName(String doctorName) {
 
         List<Doctor> doctors = em.createQuery(
                 "SELECT d FROM Doctor d WHERE d.doctorName = :name",
@@ -143,23 +143,10 @@ public class HospitalService {
                 .setParameter("name", doctorName)
                 .getResultList();
 
-        if (doctors.isEmpty()) {
-
-            System.out.println("Doctor not found!");
-
-        } else {
-
-            for (Doctor d : doctors) {
-
-                System.out.println("Doctor ID: " + d.getDoctorId());
-                System.out.println("Doctor Name: " + d.getDoctorName());
-                System.out.println("Specialization: " + d.getSpecialization());
-                System.out.println("Phone Number: " + d.getPhoneNumber());
-            }
-        }
+        return doctors;
     }
     
-    public void findPatientByName(String patientName) {
+    public List<Patient> findPatientByName(String patientName) {
 
         List<Patient> patients = em.createQuery(
                 "SELECT p FROM Patient p WHERE p.patientName = :name",
@@ -167,24 +154,9 @@ public class HospitalService {
                 .setParameter("name", patientName)
                 .getResultList();
 
-        if (patients.isEmpty()) {
-
-            System.out.println("Patient not found!");
-
-        } else {
-
-            for (Patient p : patients) {
-
-                System.out.println("Patient ID: " + p.getPatientId());
-                System.out.println("Patient Name: " + p.getPatientName());
-                System.out.println("Age: " + p.getAge());
-                System.out.println("Gender: " + p.getGender());
-                System.out.println("Phone Number: " + p.getPhoneNumber());
-            }
-        }
+        return patients;
     }
-    
-    public void findDoctorBySpecialization(String specialization) {
+    public List<Doctor> findDoctorBySpecialization(String specialization) {
 
         List<Doctor> doctors = em.createQuery(
                 "SELECT d FROM Doctor d WHERE d.specialization = :specialization",
@@ -192,55 +164,28 @@ public class HospitalService {
                 .setParameter("specialization", specialization)
                 .getResultList();
 
-        if (doctors.isEmpty()) {
-
-            System.out.println("Doctor not found!");
-
-        } else {
-
-            for (Doctor d : doctors) {
-
-                System.out.println("Doctor ID: " + d.getDoctorId());
-                System.out.println("Doctor Name: " + d.getDoctorName());
-                System.out.println("Specialization: " + d.getSpecialization());
-                System.out.println("Phone Number: " + d.getPhoneNumber());
-            }
-        }
+        return doctors;
     }
     
-    public void displayAllDoctors() {
+    public List<Doctor> displayAllDoctors() {
 
         List<Doctor> doctors = em.createQuery(
                 "SELECT d FROM Doctor d",
                 Doctor.class)
                 .getResultList();
 
-        for (Doctor d : doctors) {
-
-            System.out.println("----------------------");
-            System.out.println("Doctor ID: " + d.getDoctorId());
-            System.out.println("Doctor Name: " + d.getDoctorName());
-            System.out.println("Specialization: " + d.getSpecialization());
-            System.out.println("Phone Number: " + d.getPhoneNumber());
-        }
+        return doctors;
     }
     
-    public void displayAllPatients() {
+    
+    public List<Patient> displayAllPatients() {
 
         List<Patient> patients = em.createQuery(
                 "SELECT p FROM Patient p",
                 Patient.class)
                 .getResultList();
 
-        for (Patient p : patients) {
-
-            System.out.println("----------------------");
-            System.out.println("Patient ID: " + p.getPatientId());
-            System.out.println("Patient Name: " + p.getPatientName());
-            System.out.println("Age: " + p.getAge());
-            System.out.println("Gender: " + p.getGender());
-            System.out.println("Phone Number: " + p.getPhoneNumber());
-        }
+        return patients;
     }
     
     public void assignDoctorToPatient(int patientId, int doctorId) {
